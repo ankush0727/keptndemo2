@@ -16,7 +16,7 @@ spec:
           triggeredOn:
             - event: "qa.delivery.finished"
           tasks:
-            - name: "R4-Manual-Approval"
+            - name: "approval"
               properties:
                 pass: "manual"
                 warning: "manual"
