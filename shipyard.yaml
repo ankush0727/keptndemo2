@@ -10,15 +10,25 @@ spec:
           tasks:
             - name: "deployment"
             - name: "test"
-
-    - name: "production"
+    - name: "R4-Deploy"
       sequences:
         - name: "delivery"
           triggeredOn:
             - event: "qa.delivery.finished"
           tasks:
-            - name: "approval"
+            - name: "R4-Manual-Approval"
               properties:
                 pass: "manual"
                 warning: "manual"
             - name: "deployment"
+    - name: "Create_Release_Branch"
+      sequences:
+        - name: "delivery"
+          triggeredOn:
+            - event: "R4-Deploy.delivery.finished"
+          tasks:
+            - name: "Manual Approval to create release branch"
+              properties:
+                pass: "manual"
+                warning: "manual"
+            - name: "Create_Release_Branch"
